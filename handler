@@ -13,24 +13,37 @@
                 # MOVE SETTINGS.INI TO INACCESSIBLE CONFIGURATION FILE
                 # BEFORE IMPLEMENTING ON A FORWARD-FACING PUBLIC SERVER.
                 $settings = parse_ini_file('./settings.ini');
+                
+                # CONNECTING AZURE SQL DATABASE TO APP
+                try {
+                    $connection = new PDO("sqlsrv:server = tcp:group2db.database.windows.net,1433; Database = Group2DB", "Group2Admin", "Group2SuperAdmin!");
+                    $conenction->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                }
+                catch (PDOException $e) {
+                    print("Error connecting to SQL Server");
+                    die(print_r($e));
+                }
+                $connectionInfo = array("UID" => "Group2Admin", "pwd" => "{your_password_here}", "Database" => "Group2DB", "LoginTimeout" => 30, "Encrypt" => 1, "TrustServerCertificate" => 0);
+                $serverName = "tcp:group2db.database.windows.net,1433";
+                $connection = sqlsrv_connect($serverName, $connectionInfo);
 
                 # GET CONNECTION VARIABLES.
-                $db_type = $settings['db_type'];
-                $db_host = $settings['db_host'];
-                $db_name = $settings['db_name'];
-                $db_user = $settings['db_user'];
-                $db_pass = $settings['db_pass'];
+                # $db_type = $settings['db_type'];
+                # $db_host = $settings['db_host'];
+                # $db_name = $settings['db_name'];
+                # $db_user = $settings['db_user'];
+                # $db_pass = $settings['db_pass'];
 
-                $options = array(
-                    PDO::ATTR_EMULATE_PREPARES => false,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                );
+                # $options = array(
+                   # PDO::ATTR_EMULATE_PREPARES => false,
+                   # PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                # );
 
                 # COMBINE TYPE, HOST, AND NAME.
-                $db_info = "${db_type}:host=${db_host}; dbname=${db_name}";
+                # $db_info = "${db_type}:host=${db_host}; dbname=${db_name}";
 
                 # ESTABLISH DATABASE CONNECTION.
-                $connection = new PDO($db_info, $db_user, $db_pass, $options);
+                # $connection = new PDO($db_info, $db_user, $db_pass, $options);
 
             # HANDLE CONNECTION ERRORS.
             } catch (PDOException $error) {
