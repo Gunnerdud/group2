@@ -55,7 +55,7 @@
     function db_query($query) {
 
         # GET CONNECTION.
-        $connection = sqlsrv_connect($serverName, $connectionInfo);
+        # $connection = sqlsrv_connect($serverName, $connectionInfo);
 
         # NEED TO SANITIZE QUERY, AND IMPLEMENT PREPARED
         # STATEMENTS TO PREVENT SQL INJECTION ATTACKS.
