@@ -16,10 +16,10 @@
                 
                 # CONNECTING AZURE SQL DATABASE TO APP
                 $connection=mysqli_init(); mysqli_ssl_set($con, NULL, NULL, {ca-cert filename}, NULL, NULL); mysqli_real_connect($con, "group2db.mysql.database.azure.com", "Group2Admin@group2db", "Group2SuperAdmin!", "group2db", 3306);
-                }
-                $connectionInfo = array("UID" => "Group2Admin", "pwd" => "{your_password_here}", "Database" => "Group2DB", "LoginTimeout" => 30, "Encrypt" => 1, "TrustServerCertificate" => 0);
-                $serverName = "tcp:group2db.database.windows.net,1433";
-                $connection = sqlsrv_connect($serverName, $connectionInfo);
+                
+               # $connectionInfo = array("UID" => "Group2Admin", "pwd" => "{your_password_here}", "Database" => "Group2DB", "LoginTimeout" => 30, "Encrypt" => 1, "TrustServerCertificate" => 0);
+               # $serverName = "tcp:group2db.database.windows.net,1433";
+               # $connection = sqlsrv_connect($serverName, $connectionInfo);
 
                 # GET CONNECTION VARIABLES.
                 # $db_type = $settings['db_type'];
