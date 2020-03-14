@@ -12,7 +12,7 @@
 
                 # MOVE SETTINGS.INI TO INACCESSIBLE CONFIGURATION FILE
                 # BEFORE IMPLEMENTING ON A FORWARD-FACING PUBLIC SERVER.
-                $settings = parse_ini_file('./settings.ini');
+                # $settings = parse_ini_file('./settings.ini');
                 
                 # CONNECTING AZURE SQL DATABASE TO APP
                 $connection=mysqli_init(); mysqli_ssl_set($con, NULL, NULL, {ca-cert filename}, NULL, NULL); mysqli_real_connect($con, "group2db.mysql.database.azure.com", "Group2Admin@group2db", "Group2SuperAdmin!", "group2db", 3306);
