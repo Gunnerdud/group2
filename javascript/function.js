@@ -52,7 +52,7 @@ $(document).ready(function() {
         ]; disableElements(disabled);
 
         if (!$(this).val()) {
-            $('#preference-table').append('
+            $("#preference-table").append('
                 <tr class ="preference-tr-result">
                     <td colspan="5">There is no table data to display.</td>
                 </tr>
