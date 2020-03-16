@@ -4,9 +4,9 @@
 
         # DECLARE STATIC VARIABLE $CONNECTION TO AVOID CREATING
         # MULTIPLE UNNECESSARY CONNECTIONS TO THE DATABASE.
-        static $connection;
+        static $con;
 
-        if (!isset($connection)) {
+        if (!isset($con)) {
 
             try {
 
