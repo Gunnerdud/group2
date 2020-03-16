@@ -77,7 +77,16 @@ $(document).ready(function() {
             var application_id = application.id;
 
             if (application_id) {
-                var query = 'UPDATE project_application SET Preference_Order = '${preference}', Date = '${date}' WHERE Application_ID = '${application_id}''; postResults(query);
+                var query = "
+                    UPDATE 
+                        project_application
+                    SET 
+                        Preference_Order = '${preference}', 
+                        Date = '${date}'
+                    WHERE 
+                        Application_ID = '${application_id}'
+                    "; 
+                postResults(query);
 
             } else {
                 var query = 'INSERT INTO project_application VALUES ('','${student_id}','${project_id}','${preference}','${date}')'; postResults(query);
