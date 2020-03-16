@@ -52,11 +52,11 @@ $(document).ready(function() {
         ]; disableElements(disabled);
 
         if (!$(this).val()) {
-            $("#preference-table").append(`
+            $("#preference-table").append('
                 <tr class ="preference-tr-result">
                     <td colspan="5">There is no table data to display.</td>
                 </tr>
-            `);
+            ');
         } else {
             renderPreferenceTable($(this).val());
         };
@@ -81,7 +81,7 @@ $(document).ready(function() {
             var application_id = application.id;
 
             if (application_id) {
-                var query = `
+                var query = '
                     UPDATE
                         project_application
                     SET
@@ -89,10 +89,10 @@ $(document).ready(function() {
                         Date = '${date}'
                     WHERE
                         Application_ID = '${application_id}'
-                `; postResults(query);
+                '; postResults(query);
 
             } else {
-                var query = `
+                var query = '
                     INSERT INTO
                         project_application
                     VALUES (
@@ -101,7 +101,7 @@ $(document).ready(function() {
                         '${project_id}',
                         '${preference}',
                         '${date}'
-                )`; postResults(query);
+                )'; postResults(query);
             };
 
         }); refreshPage();
@@ -134,7 +134,7 @@ $(document).ready(function() {
 // ========================================
 
 function renderPreferenceSelect() {
-    var query = `
+    var query = '
         SELECT
             student.Student_ID,
             CONCAT_WS(" ",
@@ -143,7 +143,7 @@ function renderPreferenceSelect() {
             ) AS "Student"
         FROM
             student
-    `;
+    ';
 
     Promise.all([
         getResults(query),
@@ -156,7 +156,7 @@ function renderPreferenceSelect() {
 };
 
 function renderPreferenceTable(student_id) {
-    var query = `
+    var query = '
         SELECT
             project.Project_ID,
             project.Project_No,
@@ -171,7 +171,7 @@ function renderPreferenceTable(student_id) {
                     AND project_application.Student_ID = ${student_id}
         ORDER BY
             project.Project_No
-    `;
+    ';
 
     Promise.all([
         getResults(query),
@@ -185,7 +185,7 @@ function renderPreferenceTable(student_id) {
                 if (application.Preference_Order) {
                     var project_no = application.Project_No;
                     var preference = application.Preference_Order;
-                    $(`#preference-td-radio-${project_no}-${preference}`).prop("checked", true);
+                    $('#preference-td-radio-${project_no}-${preference}').prop("checked", true);
 
                     var enabled = [
                         $("#preference-button-update"),
@@ -203,7 +203,7 @@ function renderPreferenceTable(student_id) {
 };
 
 function renderAssignmentPage() {
-    var query = `
+    var query = '
         SELECT
             project.Project_ID,
             project.Title,
@@ -221,7 +221,7 @@ function renderAssignmentPage() {
                     ON instructor.Instructor_ID = project.Instructor_ID
                 LEFT JOIN project_sponsor
                     ON project_sponsor.Sponsor_ID = project.Sponsor_ID
-    `;
+    ';
 
     Promise.all([
         getResults(query),
@@ -237,7 +237,7 @@ function renderAssignmentPage() {
 
             var weights = getProjectWeights(applications);
             $.each(weights, function(index, weight) {
-                var element = $(`#assignment-td-${index}-weight`);
+                var element = $('#assignment-td-${index}-weight');
                 element.html((Math.round(weight * 100) / 100).toFixed(2));
             });
 
@@ -264,8 +264,8 @@ function renderAssignmentPage() {
                     var student_id = assignment.Student_ID;
 
                     var data = {
-                        Project_ID: `${project_id}`,
-                        Student_ID: `${student_id}`,
+                        Project_ID: '${project_id}',
+                        Student_ID: '${student_id}',
                         Students: {},
                     };
 
@@ -291,9 +291,9 @@ function renderAssignmentPage() {
 
 function renderAssignmentSelect(data, student_id, project_id) {
     var template = "./templates/assignment-select.htm";
-    var element = $(`#assignment-td-${project_id}-students`);
+    var element = $('#assignment-td-${project_id}-students');
     renderTemplate(data, template, element).done(function() {
-        var element = $(`select#${student_id}`);
+        var element = $('select#${student_id}');
         element.val(student_id);
     });
 };
@@ -337,43 +337,43 @@ function renderTemplate(data, template, element) {
 // ========================================
 
 function getProject(project_id) {
-    var query = `
+    var query = '
         SELECT * FROM project WHERE
             project.Project_ID = ${project_id}
-    `; return getResults(query);
+    '; return getResults(query);
 };
 
 function getProjects() {
-    var query = `SELECT * FROM project`;
+    var query = 'SELECT * FROM project';
     return getResults(query);
 };
 
 function getApplication(application_id) {
-    var query = `
+    var query = '
         SELECT * FROM project_application WHERE
             project_application.Application_ID = ${application_id}
-    `; return getResults(query);
+    '; return getResults(query);
 };
 
 function getApplications() {
-    var query = `SELECT * FROM project_application`;
+    var query = 'SELECT * FROM project_application';
     return getResults(query);
 };
 
 function getAssignments() {
-    var query = `SELECT * FROM project_assignment`;
+    var query = 'SELECT * FROM project_assignment';
     return getResults(query);
 }
 
 function getStudent(student_id) {
-    var query = `
+    var query = '
         SELECT * FROM student WHERE
             student.Student_ID = ${student_id}
-    `; return getResults(query);
+    '; return getResults(query);
 };
 
 function getStudents() {
-    var query = `SELECT * FROM student`;
+    var query = 'SELECT * FROM student';
     return getResults(query);
 };
 
