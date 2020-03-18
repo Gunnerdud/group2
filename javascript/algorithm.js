@@ -241,7 +241,7 @@ function resetStudents() {
 
 function getProjectWeights(applications) {
     var weights = {};
-    applications.forEach(function(application) {
+    for (i = 0; i < applications.length(); i++) {
         switch(Number(application.Preference_Order)) {
 
             case 1: weights[application.Project_ID] = (
@@ -256,17 +256,17 @@ function getProjectWeights(applications) {
                 weights[application.Project_ID] || 0
             ) + 1/3; break;
         };
-    });
+    };
     return weights;
 };
 
 function getPriorityProjects(projects) {
     var priority_projects = [];
-    projects.forEach(function(project) {
+    for (i = 0; i < projects.length(); i++) {
         if (project.Title.includes("*")) {
             priority_projects.push(project.Project_ID);
         };
-    });
+    };
     return priority_projects;
 };
 
